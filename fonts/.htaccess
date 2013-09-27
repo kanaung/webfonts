@@ -1,0 +1,15 @@
+Options +Indexes
+IndexOptions +FancyIndexing
+<FilesMatch "\.(ttf|otf|eot|woff|svg|svgz)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+
+AddType application/vnd.ms-fontobject .eot
+AddType application/x-font-ttf .ttf
+AddType application/x-font-opentype .otf
+AddType application/font-woff	.woff
+AddType image/svg+xml .svg
+Header set Cache-Control "max-age=31536000, public, must-revalidate"
+

@@ -1,0 +1,702 @@
+<?php
+//content type header
+//header("Content-Type: text/css");
+//find current page URL
+function curPageURL() {
+ $pageURL = 'http';
+if (!empty($_SERVER['HTTPS'])) {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["HTTP_HOST"].":".$_SERVER["SERVER_PORT"];
+ } else {
+  $pageURL .= $_SERVER["HTTP_HOST"];
+ }
+ return $pageURL;
+}
+$uri=curPageURL();//this is current page URL
+$doc_root = $_SERVER["DOCUMENT_ROOT"];
+$current_dir = dirname(__FILE__);
+$document_dir_name = basename(dirname(__FILE__));
+$base_dirname = dirname(dirname(__FILE__));
+$current_dir_uri = str_replace("\\","/",$current_dir);
+$document_root = str_replace("/","\\",$doc_root);
+$install_dir = str_replace($doc_root, "", $current_dir_uri); 
+$webpath = str_replace($document_dir_name, "", $install_dir);
+$webpath = rtrim($webpath, "/");
+//require browser detect script
+require_once('../includes/Browser.php');
+
+//call browser detect script class
+$browser = new Browser();
+$type="css";
+//define ttf fonts in base64 encode
+
+//start font embed code output script
+  if($_SERVER["QUERY_STRING"]) {
+	  if(isset($_GET['type'])){
+	$type = $_GET['type'];
+		if ($type == "js"){
+		header("content-type: text/javascript");
+		}else{
+		header("Content-Type: text/css");
+		}
+	}else{
+		header("Content-Type: text/css");	
+	}
+  // check if "format" in query.
+if(isset($_GET['format'])){
+	$fmt = $_GET['format'];
+	}else{ //no "format" in query. try to detect browser name and version and return font format extension base on requested browser. stored font extension in variable $fmt
+if( $browser->getBrowser() == Browser::BROWSER_IE && $browser->getVersion() <= 8){
+ $fmt="eot";
+}elseif( $browser->getBrowser() == Browser::BROWSER_OPERA && $browser->getVersion() <= 9){
+ $fmt="svg";
+}elseif( $browser->getBrowser() == Browser::PLATFORM_IPHONE || $browser->getBrowser() == Browser::PLATFORM_IPAD){
+ $fmt="ttf";
+}elseif( $browser->getBrowser() == Browser::BROWSER_ANDROID || $browser->getBrowser() == Browser::PLATFORM_ANDROID){
+ $fmt="woff";
+}else{
+ $fmt="ttf";
+}
+}
+if($fmt=="ttf"){
+$ext="ttf";
+$format="truetype";
+}elseif($fmt=="otf"){
+$ext="otf";
+$format="opentype";
+}elseif($fmt=="eot"){
+$ext="eot";
+$format="embedded-opentype";
+}elseif($fmt=="woff"){
+$ext="woff";
+$format="woff";
+}elseif($fmt=="svg"){
+$ext="svg#font";
+$format="svg";
+}else{
+$ext="ttf";
+$format="truetype";
+}
+//check if "font" in query string. font format will use above stored $fmt variable divided into two variable $ext and $format for 3 letter font extension and format name.
+if(isset($_GET['font'])){
+	$querys = $_GET['font'];
+/*Start to Look for duplicate values in query strings*/
+/*Define which word is duplicated and will be replaced*/
+	$duplicates=array("ayar_takhu",
+								"ayar_kasone",		#1
+								"ayar_nayon",		#2
+								"ayar_wazo",		#3
+								"ayar_wagaung",		#4
+								"ayar_tawthalin",	#5
+								"ayar_thadingyut",	#6
+								"ayar_tazaungmone",	#7
+								"ayar_natdaw",		#8
+								"ayar_pyatho",		#9
+								"ayar_tapotwe",		#10
+								"ayar_tabaung",		#11
+								"ayar_juno",		#12
+								"ayar_typewriter",	#13
+								"ayar_thawka",		#14
+								"tharlon",
+								"atku",				#21
+								"aksn",				#22
+								"anyn",				#23
+								"awzo",				#24
+								"awgg",				#25
+								"attl",				#26
+								"atdg",				#27
+								"atzm",				#28
+								"andw",				#29
+								"apyt",				#30
+								"atpt",				#31
+								"atbg",				#32
+								"ajno",				#33
+								"atwt",				#34
+								"atka",				#35
+								"mm3",				#41
+								"zg1",				#43
+								"pdk",				#44
+								"prb",				#45
+								"yko",				#46
+								"mstp",				#47
+								"mymm");			#48
+/*Define all replacement words in query strings. $duplicates and $replace must match top to bottom orderly.*/
+	$replace=array("ayar takhu",
+							"ayar kasone",		#1
+							"ayar nayon",		#2
+							"ayar wazo",		#3
+							"ayar wagaung",		#4
+							"ayar tawthalin",	#5
+							"ayar thadingyut",	#6
+							"ayar tazaungmone",	#7
+							"ayar natdaw",		#8
+							"ayar pyatho",		#9
+							"ayar tapotwe",		#10
+							"ayar tabaung",		#11
+							"ayar juno",		#12
+							"ayar typewriter",	#13
+							"ayar thawka",		#14
+							"tharlon",
+							"ayar takhu",		#21
+							"ayar kasone",		#22
+							"ayar nayon",		#23
+							"ayar wazo",		#24
+							"ayar wagaung",		#25
+							"ayar tawthalin",	#26
+							"ayar thadingyut",	#27
+							"ayar tazaungmone",	#28
+							"ayar natdaw",		#29
+							"ayar pyatho",		#30
+							"ayar tapotwe",		#31
+							"ayar tabaung",		#32
+							"ayar juno",		#33
+							"ayar typewriter",	#34
+							"ayar thawka",		#35
+							"myanmar3",			#41
+							"zawgyi-one",		#43
+							"padauk",			#44
+							"parabaik",			#45
+							"yunghkio",			#46
+							"masterpiece",		#47
+							"mymyanmar");		#48
+/*replace all necessary words to continue removing duplicated words*/
+	$uniques= str_replace($duplicates,$replace,$querys);
+	$query = explode(",",$uniques);
+	$filter = array("ayar",
+						"ayar takhu",		#1
+						"ayar kasone",		#2
+						"ayar nayon",		#3
+						"ayar wazo",		#4
+						"ayar wagaung",		#5
+						"ayar tawthalin",	#6
+						"ayar thadingyut",	#7
+						"ayar tazaungmone",	#8
+						"ayar natdaw",		#9
+						"ayar pyatho",		#10
+						"ayar tapotwe",		#11
+						"ayar tabaung",		#12
+						"ayar juno",		#13
+						"ayar typewriter",	#14
+						"ayar thawka",		#15
+						"tharlon",
+						"myanmar3",			#21
+						"zawgyi-one",		#23
+						"padauk",			#24
+						"parabaik",			#25
+						"yunghkio",			#26
+						"masterpiece",		#27
+						"mymyanmar");		#28
+	$fontsduplicates=array_intersect($query, $filter);
+/*Remove all duplicated fonts name from array*/
+	$fonts = array_unique($fontsduplicates);//this line will give you an array of unique font family names.
+	
+	$browsername = $browser->getBrowser(); //this is request browser name
+	$osname = $browser->getPlatform(); //this is request OS name
+	$fontindexkey = array();
+	foreach ($fonts as $fontindex){
+		if ($fontindex=="ayar"){
+		$fontindexkey[] = "A";
+		}
+		if ($fontindex=="ayar takhu"){
+		$fontindexkey[] = "B";
+		}
+		if ($fontindex=="ayar kasone"){
+		$fontindexkey[] = "C";
+		}
+		if ($fontindex=="ayar nayon"){
+		$fontindexkey[] = "D";
+		}
+		if ($fontindex=="ayar wazo"){
+		$fontindexkey[] = "E";
+		}
+		if ($fontindex=="ayar wagaung"){
+		$fontindexkey[] = "F";
+		}
+		if ($fontindex=="ayar tawthalin"){
+		$fontindexkey[] = "G";
+		}
+		if ($fontindex=="ayar thadingyut"){
+		$fontindexkey[] = "H";
+		}
+		if ($fontindex=="ayar tazaungmone"){
+		$fontindexkey[] = "I";
+		}
+		if ($fontindex=="ayar natdaw"){
+		$fontindexkey[] = "J";
+		}
+		if ($fontindex=="ayar pyatho"){
+		$fontindexkey[] = "K";
+		}
+		if ($fontindex=="ayar tapotwe"){
+		$fontindexkey[] = "L";
+		}
+		if ($fontindex=="ayar tabaung"){
+		$fontindexkey[] = "M";
+		}
+		if ($fontindex=="ayar typewriter"){
+		$fontindexkey[] = "N";
+		}
+		if ($fontindex=="ayar thawka"){
+		$fontindexkey[] = "O";
+		}
+		if ($fontindex=="ayar juno"){
+		$fontindexkey[] = "P";
+		}
+		if ($fontindex=="tharlon"){
+		$fontindexkey[] = "Q";
+		}
+		if ($fontindex=="myanmar3"){
+		$fontindexkey[] = "R";
+		}
+		if ($fontindex=="zawgyi-one"){
+		$fontindexkey[] = "S";
+		}
+		if ($fontindex=="padauk"){
+		$fontindexkey[] = "T";
+		}
+		if ($fontindex=="parabaik"){
+		$fontindexkey[] = "U";
+		}
+		if ($fontindex=="yunghkio"){
+		$fontindexkey[] = "V";
+		}
+		if ($fontindex=="masterpiece"){
+		$fontindexkey[] = "W";
+		}
+		if ($fontindex=="mymyanmar"){
+		$fontindexkey[] = "X";
+		}
+	}
+
+	$cssfilesuffix = implode("", $fontindexkey);// file name suffix from query string
+	$cssfilename = $osname."_".$browsername."_".$cssfilesuffix."_".$ext.".css"; //temp cssfile name
+	$cssfilename = str_replace(" ", "", $cssfilename); // strip space in file name for use in url
+	$cssfile = $base_dirname."/stylesheets/".$cssfilename;
+
+if (file_exists($cssfile) && $type == "js") { //check css file already exist and it is existed echo javascript
+			echo "document.write(\"<link rel='stylesheet' href='".$uri."".$webpath."/stylesheets/".$cssfilename."' type='text/css' />\")";
+}else{ //no cssfile existed
+			if ($type == "js"){
+			$fh = fopen($cssfile, 'w') or die("can't open file"); //try to write or open new file
+			}		
+	foreach ($fonts as $font){
+		$name= $font;
+		if ($name=="ayar"){
+		$family = ucwords($name);
+		$file="ayar";
+		}
+		if ($name=="ayar takhu"){
+		$family = ucwords($name);
+		$file="ayar_takhu";
+		}
+		if ($name=="ayar kasone"){
+		$family = ucwords($name);
+		$file="ayar_kasone";
+		}
+		if ($name=="ayar nayon"){
+		$family = ucwords($name);
+		$file="ayar_nayon";
+		}
+		if ($name=="ayar wazo"){
+		$family = ucwords($name);
+		$file="ayar_wazo";
+		}
+		if ($name=="ayar wagaung"){
+		$family = ucwords($name);
+		$file="ayar_wagaung";
+		}
+		if ($name=="ayar tawthalin"){
+		$family = ucwords($name);
+		$file="ayar_tawthalin";
+		}
+		if ($name=="ayar thadingyut"){
+		$family = ucwords($name);
+		$file="ayar_thadingyut";
+		}
+		if ($name=="ayar tazaungmone"){
+		$family = ucwords($name);
+		$file="ayar_tazaungmone";
+		}
+		if ($name=="ayar natdaw"){
+		$family = ucwords($name);
+		$file="ayar_natdaw";
+		}
+		if ($name=="ayar pyatho"){
+		$family = ucwords($name);
+		$file="ayar_pyatho";
+		}
+		if ($name=="ayar tapotwe"){
+		$family = ucwords($name);
+		$file="ayar_tapotwe";
+		}
+		if ($name=="ayar tabaung"){
+		$family = ucwords($name);
+		$file="ayar_tabaung";
+		}
+		if ($name=="ayar typewriter"){
+		$family = ucwords($name);
+		$file="ayar_typewriter";
+		}
+		if ($name=="ayar thawka"){
+		$family = ucwords($name);
+		$file="ayar_thawka";
+		}
+		if ($name=="ayar juno"){
+		$family = ucwords($name);
+		$file="ayar_juno";
+		}
+		if ($name=="tharlon"){
+		$family = ucwords($name);
+		$file="tharlon";
+		}
+		if ($name=="myanmar3"){
+		$family = ucwords($name);
+		$file="myanmar3";
+		}
+		if ($name=="zawgyi-one"){
+		$family = ucwords($name);
+		$file="zawgyi-one";
+		}
+		if ($name=="padauk"){
+		$family = ucwords($name);
+		$file="padauk";
+		}
+		if ($name=="parabaik"){
+		$family = ucwords($name);
+		$file="parabaik";
+		}
+		if ($name=="yunghkio"){
+		$family = ucwords($name);
+		$file="yunghkio";
+		}
+		if ($name=="masterpiece"){
+		$family="Masterpiece Uni Sans";
+		$file="masterpiece";
+		}
+		if ($name=="mymyanmar"){
+		$family="MyMyanmar Universal";
+		$file="MyMMUnicodeUniversal";
+		}
+
+		if( $browser->getBrowser() == Browser::BROWSER_IE ){
+
+					if ($type == "js"){
+					$csscontent = "@font-face {font-family:\"$family\";src:url('$uri$webpath/fonts/$file.eot');src:url('$uri/fonts/$file.eot?#iefix') format('embedded-opentype');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+					fwrite($fh, $csscontent);
+					}else{
+					printf("@font-face {font-family:\"%s\";src:url('$uri/fonts/$file.eot');src:url('$uri$webpath/fonts/$file.eot?#iefix') format('embedded-opentype');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file);
+					}
+
+		}else{
+					if ($type == "js"){
+					$csscontent = "@font-face {font-family:\"$family\";src:url('$uri/fonts/$file.$ext');format('$format');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+					fwrite($fh, $csscontent);
+					}else{
+					printf("@font-face {font-family:\"%s\";src:url('%s/fonts/%s.%s');format('$format');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file, $ext);
+					}
+		}	////end if else IE
+  }
+ 			if ($type == "js"){
+			fclose($fh);
+			echo "document.write(\"<link href='".$uri."".$webpath."/stylesheets/".$cssfilename."' rel='stylesheet' type='text/css' />\")";
+			}
+  } //no css file existed. created new file.
+  }else{  //no "font" in query. check if "format" in query
+  if(isset($_GET['format'])){ // "format" in query. all font will output with defined format in query
+	$fmt=$_GET['format'];
+$filter = array("ayar","ayar takhu","ayar kasone","ayar nayon","ayar wazo","ayar wagaung","ayar tawthalin","ayar thadingyut","ayar tazaungmone","ayar natdaw","ayar pyatho","ayar tapotwe","ayar tabaung","ayar juno","ayar typewriter","ayar thawka","tharlon","myanmar3","zawgyi-one","padauk","parabaik" );
+	$fonts=$filter;
+	$osname = $browser->getPlatform(); //this is request OS name
+	$cssfilesuffix = implode("_", $fonts);// file name suffix from query string
+	$cssfilename = $osname."_".$browsername."_format_".$ext.".css"; //temp cssfile name
+	$cssfilename = str_replace(" ", "", $cssfilename); // strip space in file name for use in url
+	$cssfile = $base_dirname."/stylesheets/".$cssfilename;
+
+if (file_exists($cssfile) && $type == "js") { //check css file already exist and it is existed echo javascript
+			echo "document.write(\"<link rel='stylesheet' href='".$uri."".$webpath."/stylesheets/".$cssfilename."' type='text/css' />\")";
+}else{ //no cssfile existed
+ 			if ($type == "js"){
+			$fh = fopen($cssfile, 'w') or die("can't open file"); //try to write or open new file
+			}
+						foreach ($fonts as $font){
+							$name= $font;
+							if ($name=="ayar"){
+							$family = ucwords($name);
+							$file="ayar";
+							}
+							if ($name=="ayar takhu"){
+							$family = ucwords($name);
+							$file="ayar_takhu";
+							}
+							if ($name=="ayar kasone"){
+							$family = ucwords($name);
+							$file="ayar_kasone";
+							}
+							if ($name=="ayar nayon"){
+							$family = ucwords($name);
+							$file="ayar_nayon";
+							}
+							if ($name=="ayar wazo"){
+							$family = ucwords($name);
+							$file="ayar_wazo";
+							}
+							if ($name=="ayar wagaung"){
+							$family = ucwords($name);
+							$file="ayar_wagaung";
+							}
+							if ($name=="ayar tawthalin"){
+							$family = ucwords($name);
+							$file="ayar_tawthalin";
+							}
+							if ($name=="ayar thadingyut"){
+							$family = ucwords($name);
+							$file="ayar_thadingyut";
+							}
+							if ($name=="ayar tazaungmone"){
+							$family = ucwords($name);
+							$file="ayar_tazaungmone";
+							}
+							if ($name=="ayar natdaw"){
+							$family = ucwords($name);
+							$file="ayar_natdaw";
+							}
+							if ($name=="ayar pyatho"){
+							$family = ucwords($name);
+							$file="ayar_pyatho";
+							}
+							if ($name=="ayar tapotwe"){
+							$family = ucwords($name);
+							$file="ayar_tapotwe";
+							}
+							if ($name=="ayar tabaung"){
+							$family = ucwords($name);
+							$file="ayar_tabaung";
+							}
+							if ($name=="ayar typewriter"){
+							$family = ucwords($name);
+							$file="ayar_typewriter";
+							}
+							if ($name=="ayar thawka"){
+							$family = ucwords($name);
+							$file="ayar_thawka";
+							}
+							if ($name=="ayar juno"){
+							$family = ucwords($name);
+							$file="ayar_juno";
+							}
+							if ($name=="tharlon"){
+							$family = ucwords($name);
+							$file="tharlon";
+							}
+							if ($name=="myanmar3"){
+							$family = ucwords($name);
+							$file="myanmar3";
+							}
+							if ($name=="zawgyi-one"){
+							$family = ucwords($name);
+							$file="zawgyi-one";
+							}
+							if ($name=="padauk"){
+							$family = ucwords($name);
+							$file="padauk";
+							}
+							if ($name=="parabaik"){
+							$family = ucwords($name);
+							$file="parabaik";
+							}
+							if ($name=="yunghkio"){
+							$family = ucwords($name);
+							$file="yunghkio";
+							}
+							if ($name=="masterpiece"){
+							$family="Masterpiece Uni Sans";
+							$file="masterpiece";
+							}
+							if ($name=="mymyanmar"){
+							$family="MyMyanmar Universal";
+							$file="MyMMUnicodeUniversal";
+							}
+								if( $browser->getBrowser() == Browser::BROWSER_IE ){
+											if ($type == "js"){
+											$constant = constant($constant);
+											$csscontent = "@font-face {font-family:\"$family\";src:url('$uri/fonts/$file.eot');src:url('$uri/fonts/$file.eot?#iefix') format('embedded-opentype');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+											fwrite($fh, $csscontent);
+											}else{
+											printf("@font-face {font-family:\"%s\";ssrc:url('$uri/fonts/$file.eot');src:url('$uri/fonts/$file.eot?#iefix') format('embedded-opentype');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file);
+											}
+								}else{
+											if ($type == "js"){
+											$csscontent = "@font-face {font-family:\"$family\";src:url('$uri/fonts/$file.$ext');format('$format');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+											fwrite($fh, $csscontent);
+											}else{
+											printf("@font-face {font-family:\"%s\";src:url('%s/fonts/%s.%s');format('$format');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file, $ext);
+											}
+								}	////end if else IE
+							}//end foreach
+						if ($type == "js"){
+						fclose($fh);
+						echo "document.write(\"<link ref='stylesheet' href='".$uri."".$webpath."stylesheets/".$cssfilename."'>\")";
+						}
+		}//end css file exist if else
+	}
+  } //no css file existed. created new file.
+  }else{  //no "font" , no "format" in query. i.e no query string in request url output all fonts with browser dedicated font format.
+  	header("content-type: text/javascript");
+	$filter = array("ayar","ayar takhu","ayar kasone","ayar nayon","ayar wazo","ayar wagaung","ayar tawthalin","ayar thadingyut","ayar tazaungmone","ayar natdaw","ayar pyatho","ayar tapotwe","ayar tabaung","ayar juno","ayar typewriter","ayar thawka","tharlon","myanmar3","zawgyi-one","padauk","parabaik" );
+	$fonts=$filter;
+		if( $browser->getBrowser() == Browser::BROWSER_IE && $browser->getVersion() <= 8){
+		 $fmt="eot";
+		}elseif( $browser->getBrowser() == Browser::BROWSER_OPERA && $browser->getVersion() <= 9){
+		 $fmt="svg";
+		}elseif( $browser->getBrowser() == Browser::PLATFORM_IPHONE || $browser->getBrowser() == Browser::PLATFORM_IPAD){
+		 $fmt="ttf";
+		}elseif( $browser->getBrowser() == Browser::BROWSER_ANDROID || $browser->getBrowser() == Browser::PLATFORM_ANDROID){
+		$fmt="woff";
+		}else{
+		 $fmt="ttf";
+		}//end browser detect
+		if($fmt=="ttf"){
+		$ext="ttf";
+		$format="truetype";
+		}elseif($fmt=="otf"){
+		$ext="otf";
+		$format="opentype";
+		}elseif($fmt=="eot"){
+		$ext="eot";
+		$format="embedded-opentype";
+		}elseif($fmt=="woff"){
+		$ext="woff";
+		$format="woff";
+		}elseif($fmt=="svg"){
+		$ext="svg#font";
+		$format="svg";
+		}else{
+		$ext="ttf";
+		$format="truetype";
+		}//end format
+	$osname = $browser->getPlatform(); //this is request OS name
+	$browsername = $browser->getBrowser(); //this is request browser name
+	$cssfilesuffix = implode("_", $fonts);// file name suffix from query string
+	$cssfilename = $osname."_".$browsername."_all_".$ext.".css"; //temp cssfile name
+	$cssfilename = str_replace(" ", "", $cssfilename); // strip space in file name for use in url
+	$cssfile = $base_dirname."/stylesheets/".$cssfilename;
+
+	if (file_exists($cssfile)) { //check css file already exist and it is existed echo javascript
+			echo "document.write(\"<link href='".$uri."".$webpath."/stylesheets/".$cssfilename."' rel='stylesheet' type='text/css' />\")";
+	}else{ //no cssfile existed
+		$fh = fopen($cssfile, 'w') or die("can't open file"); //try to write or open new file
+		foreach ($fonts as $font){
+				$name= $font;
+				if ($name=="ayar"){
+				$family = ucwords($name);
+				$file="ayar";
+				}
+				if ($name=="ayar takhu"){
+				$family = ucwords($name);
+				$file="ayar_takhu";
+				}
+				if ($name=="ayar kasone"){
+				$family = ucwords($name);
+				$file="ayar_kasone";
+				}
+				if ($name=="ayar nayon"){
+				$family = ucwords($name);
+				$file="ayar_nayon";
+				}
+				if ($name=="ayar wazo"){
+				$family = ucwords($name);
+				$file="ayar_wazo";
+				}
+				if ($name=="ayar wagaung"){
+				$family = ucwords($name);
+				$file="ayar_wagaung";
+				}
+				if ($name=="ayar tawthalin"){
+				$family = ucwords($name);
+				$file="ayar_tawthalin";
+				}
+				if ($name=="ayar thadingyut"){
+				$family = ucwords($name);
+				$file="ayar_thadingyut";
+				}
+				if ($name=="ayar tazaungmone"){
+				$family = ucwords($name);
+				$file="ayar_tazaungmone";
+				}
+				if ($name=="ayar natdaw"){
+				$family = ucwords($name);
+				$file="ayar_natdaw";
+				}
+				if ($name=="ayar pyatho"){
+				$family = ucwords($name);
+				$file="ayar_pyatho";
+				}
+				if ($name=="ayar tapotwe"){
+				$family = ucwords($name);
+				$file="ayar_tapotwe";
+				}
+				if ($name=="ayar tabaung"){
+				$family = ucwords($name);
+				$file="ayar_tabaung";
+				}
+				if ($name=="ayar typewriter"){
+				$family = ucwords($name);
+				$file="ayar_typewriter";
+				}
+				if ($name=="ayar thawka"){
+				$family = ucwords($name);
+				$file="ayar_thawka";
+				}
+				if ($name=="ayar juno"){
+				$family = ucwords($name);
+				$file="ayar_juno";
+				}
+				if ($name=="tharlon"){
+				$family = ucwords($name);
+				$file="tharlon";
+				}
+				if ($name=="myanmar3"){
+				$family = ucwords($name);
+				$file="myanmar3";
+				}
+				if ($name=="zawgyi-one"){
+				$family = ucwords($name);
+				$file="zawgyi-one";
+				}
+				if ($name=="padauk"){
+				$family = ucwords($name);
+				$file="padauk";
+				}
+				if ($name=="parabaik"){
+				$family = ucwords($name);
+				$file="parabaik";
+				}
+				if ($name=="yunghkio"){
+				$family = ucwords($name);
+				$file="yunghkio";
+				}
+				if ($name=="masterpiece"){
+				$family="Masterpiece Uni Sans";
+				$file="masterpiece";
+				}
+				if ($name=="mymyanmar"){
+				$family="MyMyanmar Universal";
+				$file="MyMMUnicodeUniversal";
+				}
+							if( $browser->getBrowser() == Browser::BROWSER_IE ){
+					#			printf("@font-face {font-family:\"%s\";src:url('%s/fonts/%s.eot');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file);	
+								$csscontent = "@font-face {font-family:\"$family\";src:url('$uri/fonts/$file.eot');src:url('$uri/fonts/$file.eot?#iefix') format('embedded-opentype');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+								fwrite($fh, $csscontent);
+								}else{
+								#			printf("@font-face {font-family:\"%s\";src:url('%s/fonts/%s.%s');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n", $family, $uri, $file, $ext);	
+											$csscontent = "@font-face {font-family:\"$family\";src:url('$uri/fonts/$file.$ext');format('$format');unicode-range: U+1000-U+109F, U+AA60-U+AA7B;}\n";
+											fwrite($fh, $csscontent);
+								}//end if else IE
+			}//end foreach
+		fclose($fh);
+			echo "document.write(\"<link href='".$uri."".$webpath."/stylesheets/".$cssfilename."' rel='stylesheet' type='text/css' />\")";
+		}//end css file exist if else
+  } //end no "font" no "format" else
+
+?>

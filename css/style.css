@@ -1,0 +1,231 @@
+*{ line-height: 155% !important;}
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #666;
+	font-size: 13px;
+	line-height:1.5em;
+	background-color: #1e1e1e;
+	background-image: url(images/templatemo_body.jpg);
+	background-repeat: repeat-x;
+}
+
+a, a:link, a:visited {
+
+	color: #145d7e;
+}
+
+a:hover {
+	color: #145d7e;
+	text-decoration: none;
+}
+
+.cleaner { clear: both; width: 100%; height: 0px; font-size: 0px;  }
+
+h1 { font-family:inherit;font-size: 35px; font-weight: bold; margin: 0 0 30px 0; padding: 5px 0;}
+
+
+#templatemo_outer_wrapper {
+	width: 100%;
+	background: url(images/templatemo_wrapper.jpg) top center no-repeat;
+}
+
+#templatemo_wrapper {
+	width: 970px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+#templatemo_header {
+	width: 900px;
+	height: 50px;
+	padding: 20px 35px 10px;
+}
+
+#templatemo_header  #site_title {
+	float: left;
+	width: 800px !important;
+	padding: 0;
+}
+
+#templatemo_header  #site_title h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#templatemo_header  #site_title h1 a {
+	margin: 0px;
+	padding: 0px;
+	font-family:"Ayar Nayon",Ayar !important;
+	font-size: 38px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#templatemo_header  #site_title a {
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin-left: 20px;
+	padding-bottom:50px;
+	width:800px !important;
+	height:150px !important;
+}
+#templatemo_header #site-description {
+	font-size: 16px;
+	font-family:"Ayar Typewriter",Ayar !important;
+	color: #fff;
+	font-weight: bold;
+	//letter-spacing: 2px;
+	margin-left: 0px;
+	width:800px !important;
+	position:relative;
+	margin-top:10px;
+}
+/* =Menu
+-------------------------------------------------------------- */
+
+#templatemo_menu {
+	width: 900px;
+	height: 26px;
+	padding: 12px 35px;
+	margin: 30px 0 12px;
+	background: url(images/templatemo_menu.png) repeat-x;
+	font-family:"Ayar Tapotwe";
+}
+#templatemo_menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#templatemo_menu ul li {
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	position: relative;
+	list-style: none !important;
+	float:left;
+	background:none;
+}
+#templatemo_menu ul li a {
+	float: left;
+	display: block;
+	width: 102px;
+	height: 24px;
+	padding: 3px 0px 0px 0px;
+	margin: 0 5px 0 0 ;
+	font-size: 13px;
+	text-align: center;
+	text-decoration: none;
+	color: #ccc;
+	font-weight: bold;
+	outline: none;
+	border: none;
+}
+#templatemo_menu ul li a:hover,
+#templatemo_menu ul li:hover > a,
+#templatemo_menu ul li .current {
+	color: #333;
+	background: url(images/templatemo_menu_hover.png) no-repeat;
+}
+#templatemo_menu a {
+	color: #eee;
+	display: block;
+	line-height: 3.533em;
+	padding: 0 1.0125em;
+	text-decoration: none;
+}
+#templatemo_menu ul ul {
+	-moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+	display: none;
+	float: left;
+	margin: 0;
+	position: absolute;
+	top: 1.1em;
+	left: 0;
+	width: 188px;
+	z-index: 99999;
+}
+#templatemo_menu ul ul ul {
+	left: 100%;
+	top: 0;
+}
+#templatemo_menu ul ul a {
+	background: #f9f9f9;
+	border-bottom: 1px dotted #ddd;
+	color: #444;
+	font-size: 13px;
+	font-weight: normal;
+	height: auto;
+	line-height: 1.4em;
+	padding:5px 10px;
+	width: 168px;
+}
+#templatemo_menu li:hover > a,
+#templatemo_menu ul ul :hover > a,
+#templatemo_menu a:focus {
+	background: #efefef;
+}
+#templatemo_menu li:hover > a,
+#templatemo_menu a:focus {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#f9f9f9, #e5e5e5);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9f9f9), to(#e5e5e5)); /* Older webkit syntax */
+	background: -webkit-linear-gradient(#f9f9f9, #e5e5e5);
+	color: #373737;
+}
+#templatemo_menu ul li:hover > ul {
+	display: block;
+}
+#templatemo_menu .current_page_item a {
+	font-weight: bold;
+}
+/* end of menu */
+
+#templatemo_main_top {
+	clear: both;
+	width: 970px;
+	height: 50px;
+	background: url(images/templatemo_content_top.png) no-repeat;
+}
+
+#templatemo_main_bottom {
+	clear: both;
+	width: 970px;
+	height: 50px;
+	background: url(images/templatemo_content_bottom.png) no-repeat;
+}
+
+#templatemo_main {
+	width: 900px;
+	padding: 0 35px;
+	background: url(images/templatemo_content.png) repeat-y;
+}
+
+#templatemo_content {
+	float: left;
+	width: 960px;
+}
+
+
+/* footer */
+
+#templatemo_footer {
+	width: 910px;
+	padding: 20px 30px;
+	text-align: center;
+	color: #9db9c5;
+	font-family: "Ayar Typewriter", Ayar !important;
+}
+
+#templatemo_footer a {
+	color: #9db9c5;
+}
+
+#or{
+font-size:20px;
+padding-left:300px;
+}
