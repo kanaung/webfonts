@@ -1,21 +1,13 @@
 <?php
 
 class WebFont {
-	private $custom_server_url;
-	public $browser_name;
-	private $browser_version;
+
 	private $is_mobile;
-	public $mobile_browser;
 	private $font_format;
-	private $fonts;
 	private $get_font;
 	private $font_family;
 	public $font_array;
 	private $server_url;
-	public $svg_fontname;
-	public $css_style;
-	public $combined_file;
-	public $combined_file_name;
 	public $font_query_vars;
 	public $detected_url;
 	public $all_query_vars;
@@ -23,20 +15,10 @@ class WebFont {
 
 	public function __construct($url = '', $styles_dir = 'styles', $fonts_dir = 'fonts', $default_font = array('ayar')){
 		require_once('includes/Mobile_Detect.php');
-	//	require_once('includes/Browser.php');
-	//	$b = new Browser();
+
 		$m = new Mobile_Detect();
-	//	$browser = $b->getBrowser();
-	//	$version = $b->getVersion();
-
-
 		$this->m = $m;
-	//	$this->b = $b;
-
-	//	$this->browser_name = $browser;
-	//	$this->browser_version = $version;
-
-
+		$this->is_mobile = $this->m->isMobile();
 		$this->default_font = $default_font;
 		$this->fonts_dir = $fonts_dir;
 		$this->default_url = $url;
@@ -78,22 +60,28 @@ class WebFont {
 												);
 
 		$this->font_format = $this->font_format();
-		//$this->fonts = $this->font_face();
-		//$this->get_font = $this->get_font();
+
 		$this->font_family = $this->set_fontfamily();
 
 		$this->styles_dir = $styles_dir;
 		$this->file_path_array = $this->generate_file_name();
 
 		$this->stylesheet_path = $this->file_path_array['full_path'];
-		if( ! file_exists($this->stylesheet_path) ){
-			$this->make_cssfile();
-		}
-		//print_r($this->get_font);
-		//return $this->stylesheet_path;
-		//print_r($this->font_query_vars);
+
+		$this->bulletproof_css_path = $this->file_path_array['bulletproof_path'];
+
 	}
 
+	private function init(){
+		$stylesheet_path = $this->stylesheet_path;
+		if( ! file_exists($stylesheet_path) ){
+			$this->make_cssfile();
+		}
+		$bulletproof_css_path = $this->bulletproof_css_path;
+		if( ! file_exists($bulletproof_css_path) ){
+			$this->bulletproof_css();
+		}
+	}
 
 	public function browser_name(){
 		return $this->browser_name;
@@ -118,39 +106,11 @@ class WebFont {
 
 		//	$browser = $this->browser_name;
 		//	$version = $this->browser_version;
-			$is_mobile = $this->m->isMobile();
+			$is_mobile = $this->is_mobile;
 			$is_android = $this->m->is('AndroidOS');
 			$android_version = $this->m->version('Android', Mobile_Detect::VERSION_TYPE_FLOAT);
 			$is_ios = $this->m->is('iOS');
 			$ios_version = $this->m->version('iOS', Mobile_Detect::VERSION_TYPE_FLOAT);
-
-			//$ttf = array('Android', array('Opera', '11.1'));
-			//$ie = array('Internet Explorer');
-			//$svg = array('Opera', 'Apple');
-			//$mobileGrade = $this->m->mobileGrade();
-			//echo $mobileGrade;
-/*
-			if($is_mobile){
-				if($is_android){
-				$mobile_os = 'Android';
-				//echo $android_version;
-				}
-				if($is_ios){
-				$mobile_os = 'iOS';
-				//echo $ios_version;
-				}
-
-			}else{
-			$mobile_os = NULL;
-			}
-			//var_dump($mobile_os);
-
-			if(isset($this->ios_version)){
-			$ios_version = $this->ios_version;
-			} else {
-			$ios_version = NULL;
-			}
-			*/
 
 
 			if ($this->m->is('IE')){
@@ -176,8 +136,7 @@ class WebFont {
 	}
 
 	private function make_cssfile(){
-		$browser = $this->browser_name;
-		$version = $this->browser_version;
+
 		$is_mobile = $this->m->isMobile();
 		$format = $this->font_format ;
 		$server_url = $this->file_path_array['baseurl'];
@@ -192,7 +151,7 @@ class WebFont {
 		$fullpath = $path.'/'.$styles_dir;
 		//echo $styles_dir;
 
-		$all_css_content = '/* Generated from Ayar Web Font Server */ ';
+		$all_css_content = "/* Generated from Ayar Web Font Server */ \n";
 //	$combined_stylesheet = '';
 
 		$today = getdate();
@@ -229,48 +188,103 @@ class WebFont {
 			$local = sprintf('local("%s"),', $font_name);
 			$unicode_range = 'unicode-range: U+1000-109F, U+AA60-AA7B;';
 			}
-		//	$stylesheet = $font_name.$format.($is_mobile?'mobile':'').$browser.'.css';
+
 			$stylesheet = $font_name.$format.($is_mobile?'mobile':'').'.css';
 
 
 			$stylesheet_path = $styles_dir.'/'.$stylesheet;
+
 			if( file_exists($stylesheet_path) ){
 			$css_content = file_get_contents($stylesheet_path);
 			} else {
-			$fp = fopen($stylesheet_path, 'w');
+			$fp = fopen($stylesheet_path, 'w') or die("File is not writable or directory does not exist.");
 			$css_content = sprintf('@font-face {font-family: "%1$s"; font-style: normal; font-weight: normal; src: %5$ s url("%4$s/%2$s.%3$s") %6$s; %7$s}', $font_name, $font_file, $ext, $url, $local, $extra, $unicode_range);
 			fwrite($fp, $css_content.$now);
 			fclose($fp);
 			}
 
-			$all_css_content .= preg_replace('/\/\*(.*)\*\//','', $css_content);
+			$all_css_content .= preg_replace('/\/\*(.*)\*\//','', $css_content)."\n";
+
 		}
-		$combined_file_path= $this->stylesheet_path;
+
+		$combined_file_path = $this->stylesheet_path;
 		if( ! file_exists($combined_file_path) ){
-		$af = fopen($combined_file_path, 'w');
+		$af = fopen($combined_file_path, 'w') or die("File is not writable or directory does not exist.");
 		fwrite($af, $all_css_content.$now);
 		fclose($af);
 		}
 
+
+	}
+
+	private function bulletproof_css(){
+
+		$is_mobile = $this->m->isMobile();
+
+		$server_url = $this->file_path_array['baseurl'];
+		$url = $this->file_path_array['font_dir_url'];
+		$font_family = $this->font_family;
+
+		$font_array = $this->font_array;
+		$path = dirname(__file__);
+
+		$styles_dir = $this->styles_dir;
+
+		$fullpath = $path.'/'.$styles_dir;
+
+		$all_bulletproof_content = "/* Bulletproof CSS Generated from Ayar Web Font Server */\n ";
+
+		$today = getdate();
+		$now = sprintf('/* %s - % s - %s (%s) - %s:%s:%s  */', $today['mday'], $today['month'], $today['year'], $today['weekday'], $today['hours'], $today['minutes'], $today['seconds']);
+
+		foreach( $font_family as $k => $font_name ) {
+			$font_file = str_replace(' ', '_', strtolower($font_name));
+
+				$unicode_range = 'unicode-range: U+1000-109F, U+AA60-AA7B;';
+
+
+//			$stylesheet = $font_name.$format.($is_mobile?'mobile':'').'.css';
+
+//			$bulletproof_path = $styles_dir.'/bulletproof-'.$stylesheet;
+//			if( file_exists($bulletproof_path) ){
+//				$bulletproof_content = file_get_contents($bulletproof_path);
+//			} else {
+				$svgname = $this->find_svg_fontname($font_file);
+	//			$fp = fopen($bulletproof_path, 'w');
+				$bulletproof_content = sprintf("@font-face {\n\tfont-family: '%1\$s';\n\tfont-style: normal;\n\tfont-weight: normal;\n\tsrc: url('%4\$s/%2\$s.eot');\n\tsrc: url('%4\$s/%2\$s.eot?#iefix') format('embedded-opentype'),\n\turl('%4\$s/%2\$s.woff') format('woff'),\n\turl('%4\$s/%2\$s.svg#%3\$s') format('svg'),\n\turl('%4\$s/%2\$s.ttf')  format('truetype');\n\t%5\$s\n}", $font_name, $font_file, $svgname, $url, $unicode_range);
+	//			fwrite($fp, $bulletproof_content.$now);
+	//			fclose($fp);
+	//		}
+
+			$all_bulletproof_content .= preg_replace('/\/\*(.*)\*\//','', $bulletproof_content)."\n";
+		}
+		$bulletproof_file_path = $this->bulletproof_css_path;
+		if( ! file_exists($bulletproof_file_path) ){
+		$af = fopen($bulletproof_file_path, 'w') or die("File is not writable or directory does not exist.");
+		fwrite($af, $all_bulletproof_content.$now);
+		fclose($af);
+		}
 	}
 
 	public function redirect_css(){
+
 		$css_file_path = $this->stylesheet_path;
 		$css_file_url = $this->file_path_array['full_url'];
 		if(file_exists($css_file_path)){
 			header(307);
 			header ("Location: $css_file_url");
 		} else {
-			$this->make_cssfile();
+			$this->init();
 			header(307);
 			header ("Location: $css_file_url");
 		}
 	}
 
 	public function echo_css(){
+
 		$css_file_path = $this->stylesheet_path;
 		$expires = 60*60*24*14;
-		//var_dump($css_file_path);
+
 		if(file_exists($css_file_path)){
 			header("Content-Type: text/css");
 			header("Pragma: public");
@@ -278,7 +292,7 @@ class WebFont {
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 			$css = file_get_contents($css_file_path);
 		} else {
-			$this->make_cssfile();
+			$this->init();
 			header("Content-Type: text/css");
 			header("Pragma: public");
 			header("Cache-Control: maxage=".$expires);
@@ -288,13 +302,96 @@ class WebFont {
 		print $css;
 	}
 
+	public function output_css(){
+
+		$css_file_path = $this->stylesheet_path;
+		$expires = 60*60*24*14;
+		$file_name = $this->file_path_array['stylesheet_name_nomd5'];
+		if(file_exists($css_file_path)){
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/css');
+			header('Content-Disposition: attachment; filename='.preg_replace('/Ayar|\s/', '', $file_name));
+			header('Content-Transfer-Encoding: text');
+			header("Pragma: public");
+			header("Cache-Control: maxage=".$expires);
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+			header('Content-Length: ' . filesize($css_file_path));
+			ob_clean();
+			flush();
+			readfile($css_file_path);
+		} else {
+			$this->init();
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/css');
+			header('Content-Disposition: attachment; filename='.preg_replace('/Ayar|\s/', '', $file_name));
+			header('Content-Transfer-Encoding: text');
+			header("Pragma: public");
+			header("Cache-Control: maxage=".$expires);
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+			header('Content-Length: ' . filesize($css_file_path));
+			ob_clean();
+			flush();
+			readfile($css_file_path);
+		}
+		//print $css;
+	}
+
 	public function echo_js(){
 
 	}
 
+	public function get_bulletproof(){
+
+		$expires = 60*60*24*14;
+		$css_file = $this->file_path_array['bulletproof_path'];
+		$file_name = $this->file_path_array['bulletproof_file_name_nomd5'];
+		if(file_exists($css_file)){
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/css');
+			header('Content-Disposition: attachment; filename='.preg_replace('/Ayar|\s/', '', $file_name));
+			header('Content-Transfer-Encoding: text');
+			header("Pragma: public");
+			header("Cache-Control: maxage=".$expires);
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+			header('Content-Length: ' . filesize($css_file));
+			ob_clean();
+			flush();
+			readfile($css_file);
+			exit;
+		//echo $this->file_path_array['bulletproof_url'];
+		}else{
+			$this->init();
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/css');
+			header('Content-Disposition: attachment; filename='.preg_replace('/Ayar|\s/', '', $file_name));
+			header('Content-Transfer-Encoding: text');
+			header("Pragma: public");
+			header("Cache-Control: maxage=".$expires);
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+			header('Content-Length: ' . filesize($css_file));
+			ob_clean();
+			flush();
+			readfile($css_file);
+			exit;
+		}
+	}
+
+	public function generate_bulletproof(){
+
+		$css_file = $this->file_path_array['bulletproof_path'];
+
+		if(file_exists($css_file)){
+			$css = file_get_contents($css_file);
+		} else {
+			$this->init();
+
+			$css = file_get_contents($css_file);
+		}
+		echo $css;
+	}
+
 	private function generate_file_name(){
-		$browser = $this->browser_name;
-		$version = $this->browser_version;
+
 		$is_mobile = $this->is_mobile;
 		$format = $this->font_format ;
 		$url = $this->server_url;
@@ -304,13 +401,20 @@ class WebFont {
 		$basepath = $path;
 		$fullpath = $basepath.'/'.$styles_dir;
 		$combined_stylesheet = '';
+		$bp_stylesheet_path = '';
 		foreach( $font_family as $k => $font_name ) {
-		$stylesheet = $font_name.$format.($is_mobile?'mobile':'').$browser.'.css';
-		$stylesheet_path = $styles_dir.$stylesheet;
-		$combined_stylesheet .= $stylesheet_path;
+		$stylesheet = $font_name.$format.($is_mobile?'mobile':'');
+
+		$bp_stylesheet_path .= $font_name;
+		$combined_stylesheet .= $stylesheet;
 		}
+
 		$combined_file_name = md5($combined_stylesheet).'.css';
+		$combined_file_name_nomd5 = $combined_stylesheet.'.css';
 		$combined_file_path = $styles_dir.'/'.$combined_file_name;
+		$bulletproof_file_name = md5($bp_stylesheet_path).'.css';
+		$bulletproof_file_name_nomd5 = $bp_stylesheet_path.'.css';
+		$bulletproof_path = $styles_dir.'/bulletproof-'.$bulletproof_file_name;
 		//echo $combined_file_name;
 		$file_path_array = array(
 									'full_path' => $basepath.'/'.$combined_file_path,
@@ -320,8 +424,13 @@ class WebFont {
 									'style_dir_path' => $fullpath,
 									'style_dir_url' => $url.'/'.$styles_dir,
 									'stylesheet_name' => $combined_file_name,
+									'stylesheet_name_nomd5' => $combined_file_name_nomd5,
 									'style_dir_name' => $styles_dir,
 									'stylesheet_path' => $combined_file_path,
+									'bulletproof_file_name' => $bulletproof_file_name,
+									'bulletproof_file_name_nomd5' => $bulletproof_file_name_nomd5,
+									'bulletproof_path' => $bulletproof_path,
+									'bulletproof_url' => $url.'/'.$bulletproof_path,
 									'font_dir_url'	=> $url.'/'.$this->fonts_dir
 									);
 		return $file_path_array;
@@ -351,18 +460,20 @@ class WebFont {
 	}
 
 	private function get_font(){
-		if(isset($_GET['font'])){
+		if( isset($_GET['font']) ){
 			$query = $_GET['font'];
 			$query_to_array = explode(',', $query);
 			$lookup_array = array_keys($this->font_query_vars());
 
-			$get_font = array_intersect($query_to_array, $lookup_array);
-			if(count($get_font) != '0'){
-				$this->get_font = $get_font;
+			$query_font = array_intersect($query_to_array, $lookup_array);
+			//var_dump($query_font);
+			if( ! empty($query_font) ){
+				$this->get_font = $query_font;
 			//	echo 'This is true';
 			} else {
 				$this->get_font = $this->default_font;
 			}
+
 		} else {
 			$this->get_font = $this->default_font;
 		}

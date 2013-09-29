@@ -17,7 +17,7 @@ header("Content-Type: text/html");
 <meta name="viewport" content="width=device-width" />
 <title>MyanmaPress Web Fonts | ြမန်​မာ့​ပ​ရက်စ် | ြမန်​မာ​တို့​အ​တွက်​ ​ြမန်​မာ့​ပ​ရက်စ်</title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="stylesheet" type="text/css" href="<?php echo $webfont->detected_url; ?>/css.php?font=ayar,ayuni,atku,aksn,anyn,awzo,awgg,attl,atdg,atzm,andw,apyt,atpt,atbg,atwt,atka,ajno,zawgyi-one,myanmar3,mymm,pdk,prb,tnln,taln,yko" />
+<link rel="stylesheet" type="text/css" href="<?php echo $webfont->detected_url; ?>/bulletproof.php?font=ayar,ayuni,atku,aksn,anyn,awzo,awgg,attl,atdg,atzm,andw,apyt,atpt,atbg,atwt,atka,ajno,zawgyi-one,myanmar3,mymm,pdk,prb,tnln,taln,yko" />
 <link href="<?php echo $webfont->detected_url; ?>/css/style.css" rel="stylesheet" type="text/css" />
 
 </head>

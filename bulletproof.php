@@ -6,5 +6,7 @@ include_once('webfont.php');
 $url = 'http://webfont.ayar.co/'; //no trailing slash
 $webfont = new WebFont();
 
-$webfont->echo_css();
+//$webfont->get_bulletproof();
+//var_export($webfont);
+$webfont->generate_bulletproof();
 ?>
