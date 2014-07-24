@@ -1,0 +1,13 @@
+/* Bulletproof CSS Generated from Ayar Web Font Server */
+ @font-face {
+	font-family: 'Ayar';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/fonts/ayar.eot');
+	src: url('http://localhost:7788/fonts/ayar.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/fonts/ayar.woff') format('woff'),
+	url('http://localhost:7788/fonts/ayar.svg#ayarregular') format('svg'),
+	url('http://localhost:7788/fonts/ayar.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+/* 24 - July - 2014 (Thursday) - 11:22:58  */

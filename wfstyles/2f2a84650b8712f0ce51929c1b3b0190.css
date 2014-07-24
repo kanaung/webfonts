@@ -1,0 +1,27 @@
+/* Generated from Ayar Web Font Server */ 
+@font-face {font-family: "Ayar"; font-style: normal; font-weight: normal; src: local("Ayar"), url("http://localhost:7788/webfonts/ayar.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Uni"; font-style: normal; font-weight: normal; src: local("Ayar Uni"), url("http://localhost:7788/webfonts/ayar_uni.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Takhu"; font-style: normal; font-weight: normal; src: local("Ayar Takhu"), url("http://localhost:7788/webfonts/ayar_takhu.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Kasone"; font-style: normal; font-weight: normal; src: local("Ayar Kasone"), url("http://localhost:7788/webfonts/ayar_kasone.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Nayon"; font-style: normal; font-weight: normal; src: local("Ayar Nayon"), url("http://localhost:7788/webfonts/ayar_nayon.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Wazo"; font-style: normal; font-weight: normal; src: local("Ayar Wazo"), url("http://localhost:7788/webfonts/ayar_wazo.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Wagaung"; font-style: normal; font-weight: normal; src: local("Ayar Wagaung"), url("http://localhost:7788/webfonts/ayar_wagaung.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Tawthalin"; font-style: normal; font-weight: normal; src: local("Ayar Tawthalin"), url("http://localhost:7788/webfonts/ayar_tawthalin.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Thadingyut"; font-style: normal; font-weight: normal; src: local("Ayar Thadingyut"), url("http://localhost:7788/webfonts/ayar_thadingyut.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Tazaungmone"; font-style: normal; font-weight: normal; src: local("Ayar Tazaungmone"), url("http://localhost:7788/webfonts/ayar_tazaungmone.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Natdaw"; font-style: normal; font-weight: normal; src: local("Ayar Natdaw"), url("http://localhost:7788/webfonts/ayar_natdaw.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Pyatho"; font-style: normal; font-weight: normal; src: local("Ayar Pyatho"), url("http://localhost:7788/webfonts/ayar_pyatho.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Tapotwe"; font-style: normal; font-weight: normal; src: local("Ayar Tapotwe"), url("http://localhost:7788/webfonts/ayar_tapotwe.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Tabaung"; font-style: normal; font-weight: normal; src: local("Ayar Tabaung"), url("http://localhost:7788/webfonts/ayar_tabaung.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Typewriter"; font-style: normal; font-weight: normal; src: local("Ayar Typewriter"), url("http://localhost:7788/webfonts/ayar_typewriter.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Juno"; font-style: normal; font-weight: normal; src: local("Ayar Juno"), url("http://localhost:7788/webfonts/ayar_juno.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Ayar Thawka"; font-style: normal; font-weight: normal; src: local("Ayar Thawka"), url("http://localhost:7788/webfonts/ayar_thawka.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Myanmar3"; font-style: normal; font-weight: normal; src: local("Myanmar3"), url("http://localhost:7788/webfonts/myanmar3.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "My Myanmar"; font-style: normal; font-weight: normal; src: local("My Myanmar"), url("http://localhost:7788/webfonts/my_myanmar.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Padauk"; font-style: normal; font-weight: normal; src: local("Padauk"), url("http://localhost:7788/webfonts/padauk.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Parabaik"; font-style: normal; font-weight: normal; src: local("Parabaik"), url("http://localhost:7788/webfonts/parabaik.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Thanlwin"; font-style: normal; font-weight: normal; src: local("Thanlwin"), url("http://localhost:7788/webfonts/thanlwin.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Tharlon"; font-style: normal; font-weight: normal; src: local("Tharlon"), url("http://localhost:7788/webfonts/tharlon.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Zawgyi-One"; font-style: normal; font-weight: normal; src: local("Zawgyi-One"), url("http://localhost:7788/webfonts/zawgyi-one.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+@font-face {font-family: "Yunghkio"; font-style: normal; font-weight: normal; src: local("Yunghkio"), url("http://localhost:7788/webfonts/yunghkio.woff") format("woff"); unicode-range: U+1000-109F, U+AA60-AA7B;}
+/* 24 - July - 2014 (Thursday) - 11:51:7  */

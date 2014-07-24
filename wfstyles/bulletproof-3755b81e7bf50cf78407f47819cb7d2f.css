@@ -1,0 +1,277 @@
+/* Bulletproof CSS Generated from Ayar Web Font Server */
+ @font-face {
+	font-family: 'Ayar';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar.eot');
+	src: url('http://localhost:7788/webfonts/ayar.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar.svg#ayarregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Uni';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_uni.eot');
+	src: url('http://localhost:7788/webfonts/ayar_uni.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_uni.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_uni.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_uni.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Takhu';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_takhu.eot');
+	src: url('http://localhost:7788/webfonts/ayar_takhu.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_takhu.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_takhu.svg#ayar_takhubold') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_takhu.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Kasone';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_kasone.eot');
+	src: url('http://localhost:7788/webfonts/ayar_kasone.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_kasone.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_kasone.svg#ayar_kasonebold') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_kasone.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Nayon';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_nayon.eot');
+	src: url('http://localhost:7788/webfonts/ayar_nayon.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_nayon.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_nayon.svg#ayar_nayonregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_nayon.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Wazo';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_wazo.eot');
+	src: url('http://localhost:7788/webfonts/ayar_wazo.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_wazo.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_wazo.svg#ayar_wazoregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_wazo.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Wagaung';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_wagaung.eot');
+	src: url('http://localhost:7788/webfonts/ayar_wagaung.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_wagaung.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_wagaung.svg#ayar_wagaungregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_wagaung.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Tawthalin';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_tawthalin.eot');
+	src: url('http://localhost:7788/webfonts/ayar_tawthalin.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_tawthalin.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_tawthalin.svg#ayar_tawthalinlight') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_tawthalin.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Thadingyut';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_thadingyut.eot');
+	src: url('http://localhost:7788/webfonts/ayar_thadingyut.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_thadingyut.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_thadingyut.svg#ayar_thadingyutcondensed_bold') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_thadingyut.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Tazaungmone';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_tazaungmone.eot');
+	src: url('http://localhost:7788/webfonts/ayar_tazaungmone.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_tazaungmone.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_tazaungmone.svg#ayar_tanzaungmoneregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_tazaungmone.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Natdaw';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_natdaw.eot');
+	src: url('http://localhost:7788/webfonts/ayar_natdaw.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_natdaw.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_natdaw.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_natdaw.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Pyatho';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_pyatho.eot');
+	src: url('http://localhost:7788/webfonts/ayar_pyatho.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_pyatho.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_pyatho.svg#ayar_pyathoregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_pyatho.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Tapotwe';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_tapotwe.eot');
+	src: url('http://localhost:7788/webfonts/ayar_tapotwe.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_tapotwe.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_tapotwe.svg#ayar_tapotweregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_tapotwe.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Tabaung';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_tabaung.eot');
+	src: url('http://localhost:7788/webfonts/ayar_tabaung.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_tabaung.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_tabaung.svg#ayar_tabaungbold') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_tabaung.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Typewriter';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_typewriter.eot');
+	src: url('http://localhost:7788/webfonts/ayar_typewriter.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_typewriter.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_typewriter.svg#ayar_typewriterregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_typewriter.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Juno';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_juno.eot');
+	src: url('http://localhost:7788/webfonts/ayar_juno.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_juno.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_juno.svg#ayar_junobold') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_juno.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Ayar Thawka';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/ayar_thawka.eot');
+	src: url('http://localhost:7788/webfonts/ayar_thawka.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/ayar_thawka.woff') format('woff'),
+	url('http://localhost:7788/webfonts/ayar_thawka.svg#ayar_thawkaregular') format('svg'),
+	url('http://localhost:7788/webfonts/ayar_thawka.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Myanmar3';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/myanmar3.eot');
+	src: url('http://localhost:7788/webfonts/myanmar3.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/myanmar3.woff') format('woff'),
+	url('http://localhost:7788/webfonts/myanmar3.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/myanmar3.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'My Myanmar';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/my_myanmar.eot');
+	src: url('http://localhost:7788/webfonts/my_myanmar.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/my_myanmar.woff') format('woff'),
+	url('http://localhost:7788/webfonts/my_myanmar.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/my_myanmar.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Padauk';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/padauk.eot');
+	src: url('http://localhost:7788/webfonts/padauk.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/padauk.woff') format('woff'),
+	url('http://localhost:7788/webfonts/padauk.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/padauk.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Parabaik';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/parabaik.eot');
+	src: url('http://localhost:7788/webfonts/parabaik.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/parabaik.woff') format('woff'),
+	url('http://localhost:7788/webfonts/parabaik.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/parabaik.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Thanlwin';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/thanlwin.eot');
+	src: url('http://localhost:7788/webfonts/thanlwin.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/thanlwin.woff') format('woff'),
+	url('http://localhost:7788/webfonts/thanlwin.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/thanlwin.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Tharlon';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/tharlon.eot');
+	src: url('http://localhost:7788/webfonts/tharlon.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/tharlon.woff') format('woff'),
+	url('http://localhost:7788/webfonts/tharlon.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/tharlon.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Zawgyi-One';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/zawgyi-one.eot');
+	src: url('http://localhost:7788/webfonts/zawgyi-one.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/zawgyi-one.woff') format('woff'),
+	url('http://localhost:7788/webfonts/zawgyi-one.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/zawgyi-one.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+@font-face {
+	font-family: 'Yunghkio';
+	font-style: normal;
+	font-weight: normal;
+	src: url('http://localhost:7788/webfonts/yunghkio.eot');
+	src: url('http://localhost:7788/webfonts/yunghkio.eot?#iefix') format('embedded-opentype'),
+	url('http://localhost:7788/webfonts/yunghkio.woff') format('woff'),
+	url('http://localhost:7788/webfonts/yunghkio.svg#') format('svg'),
+	url('http://localhost:7788/webfonts/yunghkio.ttf')  format('truetype');
+	unicode-range: U+1000-109F, U+AA60-AA7B;
+}
+/* 24 - July - 2014 (Thursday) - 11:51:7  */

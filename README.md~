@@ -12,7 +12,7 @@ $style-dir = 'wfstyles';
 $font-dir = 'webfonts';
 
 $webfont = new WebFont($url, $style-dir, $font-dir);
-
+//$webfont->url = "http://sithu-pc.net";
 $webfont->redirect_css();
 ?>
 ```

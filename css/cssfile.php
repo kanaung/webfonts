@@ -1,8 +1,7 @@
 <?php
 include_once('../WebFont-class.php');
 
-
 $webfont = new WebFont();
-
-$webfont->echo_css();
+//$webfont->url = "http://sithu-pc.net";
+$webfont->redirect_css();
 ?>
